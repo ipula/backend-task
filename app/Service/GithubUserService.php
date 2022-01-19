@@ -15,7 +15,7 @@ class GithubUserService
         $this->url = 'https://api.github.com';
         $this->headers = [
             'Content-Type' =>'application/json',
-            'Authorization'=>'token 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'
+            'Authorization'=>'token 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'
         ];
     }
 
