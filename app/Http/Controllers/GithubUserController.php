@@ -58,4 +58,15 @@ class GithubUserController extends Controller
             );
         }
     }
+
+    function getPopularUsers(){
+        try {
+            $userData = $this->githubUserService->getPopularUsers();
+            return response ()->json ( ['data' => $userData], 200 );
+        } catch (\Exception $e) {
+            throw new \App\Helpers\BackendException(
+                'Unable get data from service endpoint:'. $e->getMessage()
+            );
+        }
+    }
 }

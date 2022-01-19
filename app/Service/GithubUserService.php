@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Helpers\GuzzleWrapper;
 use App\Models\UserAccounts;
 use App\Models\UserRepositories;
+use Illuminate\Support\Facades\Config;
 
 class GithubUserService
 {
@@ -15,7 +16,7 @@ class GithubUserService
         $this->url = 'https://api.github.com';
         $this->headers = [
             'Content-Type' =>'application/json',
-            'Authorization'=>'token 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'
+            'Authorization'=>'token '.Config::get('custom_config.GITHUB_TOKEN')
         ];
     }
 
@@ -52,10 +53,22 @@ class GithubUserService
         return $accounts;
     }
 
+    public function getPopularUsers(){
+
+        $accounts = UserAccounts::with(['userRepositories']);
+        $accounts = $accounts
+            ->orderBy('detail_requested','DESC')
+            ->take(3)
+            ->get();
+        return $accounts;
+    }
+
     public function getAUser($id)
     {
         $account = UserAccounts::with(['userRepositories'])
             ->find($id);
+        $account->detail_requested = $account->detail_requested+1;
+        $account->save();
         return $account;
     }
 

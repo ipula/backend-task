@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/users", [\App\Http\Controllers\GithubUserController::class, 'getAllUsers']); // Done
 Route::get("/user", [\App\Http\Controllers\GithubUserController::class, 'getAUser']); // Done
+Route::get("/user/popular", [\App\Http\Controllers\GithubUserController::class, 'getPopularUsers']); // Done
 Route::get("/user/{id}", [\App\Http\Controllers\GithubUserController::class, 'getUserDetails']); // Done
 Route::get("/repos/{user_id}", [\App\Http\Controllers\GithubUserController::class, 'getRepos']); // Done
 
