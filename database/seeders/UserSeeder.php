@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $since = 1;
-        $userData = $this->githubUserService->getAllUsersSeeder(['per_page'=>10,'since'=>$since]);
+        $userData = $this->githubUserService->getAllUsersSeeder(['per_page'=>100,'since'=>$since]);
         foreach ($userData as $key => $data){
             $user = $this->githubUserService->getAUserSeeder([],$data['login']);
             $userRepo = $this->githubUserService->getUserReposSeeder([],$data['login']);
